@@ -124,6 +124,8 @@ let rec analyze = lexer
       Bad (Ulexing.utf8_lexeme lexbuf)
   | cyrillic* ce cb cu ct (* cyrillic* *) ->
       Bad (Ulexing.utf8_lexeme lexbuf)
+  | cyrillic* cp cie cd cie ck ->
+      Bad (Ulexing.utf8_lexeme lexbuf)
   | cyrillic* cp ci cd (co | ca) cr ->
       Bad (Ulexing.utf8_lexeme lexbuf)
   | cyrillic* cp ci cd cie_io cr ->

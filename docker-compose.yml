@@ -1,0 +1,8 @@
+services:
+  sulci:
+    image: ghcr.io/selim13/sulci/sulci:latest
+    restart: unless-stopped
+    volumes:
+      - ./data/etc:/etc/sulci
+      - ./data/var:/var/sulci
+      - ./data/log:/var/log/sulci

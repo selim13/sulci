@@ -1,0 +1,207 @@
+<sulci>
+ <account jid='username@server'>
+  <!-- <ip>127.0.0.1</ip> -->
+  <!-- <ip>localhost</ip> -->
+  <!-- <port>5222</port> -->
+  <resource>Ocaml</resource>
+  <password>secret</password>
+
+  <!-- Uncomment this to use STARTTLS
+    <starttls/>
+  -->
+
+  <!-- Uncomment this to use COMPRESS
+  <compress/>
+  -->
+
+  
+  <!-- <rawxml_log file='/var/log/sulci/log1.log'/> -->
+ 
+
+  <!-- Reconnect interval in seconds. If count=0 do it infinitely -->
+  <!-- If you use NOT OWN jabber server, it is strongly recommended do not
+       do times more than 3.
+  <reconnect interval='10' times='3' />
+  -->
+  <!-- Max length of an outcoming stanza. By default 4000 Unicode symbols
+  <max_stanza_length value='4000'/>
+  -->
+  <!-- Max length of an outcoming message body. By default 512 Unicode symbols
+       Long messages will be splitted
+  <max_message_length value='512'/>
+  -->
+ </account>
+ 
+ <!-- Report log -->
+ <log>
+  <level value='debug'/>
+  <!--
+  <syslog facility='local0'/>
+  -->
+  <stderr/>
+  <!--
+  <piped_log cmd='cmd'/>
+  -->
+  <!-- <file path='/var/log/sulci/report.log'/> -->
+ </log>
+
+ <lang dir='/usr/share/sulci/lang' default='ru'/>
+
+ <acl jid='selim13@jabber.ru' class='botmaster'/>
+
+ 
+ <plugins>
+
+  <plugin name='commands' path='/usr/share/sulci/plugins/plugin_command'>
+   <prefix value='.'/>
+  </plugin>
+
+  <plugin name='scheduler' path='/usr/share/sulci/plugins/plugin_scheduler'/>
+
+  <plugin name='http' path='/usr/share/sulci/plugins/http_suck'/>
+
+  <plugin name='conversion' path='/usr/share/sulci/plugins/conv_xml' />
+
+  <plugin name='admin' path='/usr/share/sulci/plugins/plugin_admin'>
+   <command id='msg' access='botmaster'/>
+   <command id='quit' access='botmaster'/>
+   <command id='lang_update' access='botmaster'/>
+   <command id='lang_msgid' access='botmaster'/>
+   <command id='sh' access='botmaster' enabled='false'/>
+  </plugin>
+
+  <plugin name='brainfuck' path='/usr/share/sulci/plugins/plugin_brainfuck'>
+   <command id='bf'/>
+  </plugin>
+
+  <plugin name='calc' path='/usr/share/sulci/plugins/plugin_calc'>
+   <command id='calc'/>
+   <command id='rpn'/>
+  </plugin>
+
+  <plugin name='currency' path='/usr/share/sulci/plugins/plugin_currency'>
+   <scheduler time='11:00'/>
+   <command id='curr'/>
+  </plugin>
+
+  <plugin name='dict' path='/usr/share/sulci/plugins/plugin_dict'>
+   <!-- <server port=2628 host='localhost'/> -->
+   <server host='dict.org'/>
+   <command id='dict'/>
+  </plugin>
+
+  <plugin name='google' path='/usr/share/sulci/plugins/plugin_google'>
+   <command id='google'/>
+   <command id='translate' name='gtr'/>
+  </plugin>
+
+  <plugin name='hostip' path='/usr/share/sulci/plugins/plugin_hostip'>
+   <command id='hostip'/>
+  </plugin>
+
+  <plugin name='misc' path='/usr/share/sulci/plugins/plugin_misc'>
+   <command id='dns'/>
+ </plugin>
+
+  <plugin name='mueller' path='/usr/share/sulci/plugins/plugin_mueller'>
+   <db file='/usr/share/sulci/Mueller24.koi'/>
+   <command id='mueller'/>
+  </plugin>
+
+  <plugin name='ping' path='/usr/share/sulci/plugins/plugin_ping'>
+   <command id='ping'/>
+  </plugin>
+
+  <plugin name='tld' path='/usr/share/sulci/plugins/plugin_tld'>
+   <db file='/usr/share/sulci/tlds/tlds'/>
+   <command id='tld'/>
+  </plugin>
+
+  <plugin name='translate' path='/usr/share/sulci/plugins/plugin_translate'>
+   <command id='tr'/>
+  </plugin>
+
+  <plugin name='userinfo' path='/usr/share/sulci/plugins/plugin_userinfo'>
+   <command id='version'/>
+   <command id='idle'/>
+   <command id='uptime'/>
+   <command id='time'/>
+   <command id='stats'/>
+  </plugin>
+
+  <plugin name='vcard' path='/usr/share/sulci/plugins/plugin_vcard'>
+   <command id='vcard'/>
+  </plugin>
+
+  <plugin name='vocabulary' path='/usr/share/sulci/plugins/plugin_vocabulary'>
+   <db file='/var/sulci/vocabulary.db'/>
+   <command id='wtf'/>
+   <command id='dfn'/>
+   <command id='wtfremove' access='moderator'/>
+  </plugin>
+
+  <plugin name='weather' path='/usr/share/sulci/plugins/plugin_weather'>
+   <command id='wz'/>
+  </plugin>
+
+  <plugin name='yandex' path='/usr/share/sulci/plugins/plugin_yandex'>
+   <command id='blogs'/>
+  </plugin>
+
+  <!-- it was used on http://ejabberd.jabber.ru/ to display total 
+       registered users and users online using ejabberd -->
+  <plugin name='globalstats' path='/usr/share/sulci/plugins/plugin_globalstats'>
+   <serverlist file='servers.list'/>
+   <result file='servers.res'/>
+   <interval value='3600'/>
+  </plugin>
+
+  <plugin name='muc_log' path='/usr/share/sulci/plugins/muc_log'>
+     <dir path='/var/sulci/chatlogs'/>
+  </plugin>
+
+  <plugin name='muc' path='/usr/share/sulci/plugins/muc'>
+   <max_public_message_length value='400'/>
+   <db file='/var/sulci/sulci_muc.db'/>
+   <acl role='moderator' class='moderator'/>
+   <acl affiliation='owner' class='owner'/>
+  </plugin>
+
+  <plugin name='admin_muc' path='/usr/share/sulci/plugins/plugin_admin_muc'>
+   <command id='invite' access='botmaster'/>
+   <command id='join' access='botmaster'/>
+   <command id='leave' access='botmaster'/>
+   <command id='nick' access='botmaster'/>
+  </plugin>
+
+  <plugin name='cerberus' path='/usr/share/sulci/plugins/plugin_cerberus'>
+   <action value='kick'/>
+   <notify jid='jid@jabber.server'/>
+  </plugin>
+
+  <plugin name='markov' path='/usr/share/sulci/plugins/plugin_markov_sqlite3'>
+   <dir path='/var/sulci/markov_db'/>
+   <max_words value='20' />
+   <command id='markov_count' name='!!!count'/>
+   <command id='markov_top' name='!!!top'/>
+  </plugin>
+
+  <plugin name='roulette' path='/usr/share/sulci/plugins/plugin_roulette'>
+   <command id='roulette' name='tryme'/>
+  </plugin>
+
+  <plugin name='seen' path='/usr/share/sulci/plugins/plugin_seen'>
+   <db file='/var/sulci/sulci_users.db'/>
+   <command id='seen'/>
+  </plugin>
+
+  <plugin name='talkers' path='/usr/share/sulci/plugins/plugin_talkers'>
+   <db file='/var/sulci/talkers.db'/>
+   <command id='talkers'/>
+  </plugin>
+
+  <plugin name='vocabulary_muc' path='/usr/share/sulci/plugins/plugin_vocabulary_muc'>
+   <command id='dfn'/>
+  </plugin>
+ </plugins>
+</sulci>

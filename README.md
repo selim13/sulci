@@ -21,6 +21,10 @@ fun conversationalist.
 Refer to `Dockerfile` for building procedures in case of a wish of running 
 the bot outside of docker container.
 
+## Changes
+
+- Added handling of external HTTPS requests.
+
 ## Included plugins and their commands
 
 ### Admin
@@ -241,7 +245,7 @@ Manages vocabulary database.
   Removes a specific definition for a term. If no value is provided, all definitions for the key are removed. Moderators only.  
   Example: `.wtfremove ocaml=awesome`
 
-### Weather (not functioning)
+### Weather
 Displays weather.
 
 - **`.wz <code>`**  

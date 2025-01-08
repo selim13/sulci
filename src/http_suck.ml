@@ -1,4 +1,5 @@
 open Nethttp_client
+open Nettls_gnutls
 open Hooks
 
 exception ClientError
@@ -22,6 +23,7 @@ let get_http_keep_alive_group() =
     | Some g -> g
 
 let http_init() =
+  let () = Nettls_gnutls.init() in
   let esys = Unixqueue.create_unix_event_system() in
   let keep_alive_group = Unixqueue.new_group esys in
     http_esys := Some esys;

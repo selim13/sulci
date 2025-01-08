@@ -3,6 +3,8 @@ FROM ocaml/opam:debian-12-ocaml-4.04 AS build
 USER root
 RUN apt-get update && apt-get -y --no-install-recommends install \
     pkg-config \
+    libgnutls28-dev \
+    nettle-dev \
     libgdbm-compat-dev \
     libgdbm-dev \
     libgmp-dev \
@@ -11,10 +13,12 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
     zlib1g-dev
 RUN mkdir /opt/sulci && chown opam:opam /opt/sulci
 
+
 USER opam
-RUN opam install \
+RUN opam install -y \
     ocamlfind.1.9.6 \
     oasis.0.4.11 \
+    conf-gnutls.1 \
     dbm.1.3 \
     ocamlnet.4.1.9-2 \
     ulex.1.2 \
@@ -63,6 +67,7 @@ FROM debian:12-slim
 LABEL org.opencontainers.image.source=https://github.com/selim13/sulci
 
 RUN apt-get update && apt-get -y --no-install-recommends install \
+    ca-certificates \
     libgdbm-compat4 \
     libgdbm6 \
     libpcre3 \

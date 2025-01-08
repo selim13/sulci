@@ -72,7 +72,7 @@ Executable sulci
   BuildDepends:   threads, brainfuck, logger, dehtml, 
                   scheduler, strftime, erm_xml, erm_xmpp (>= 0.4), 
                   text, dynlink, sqlite3, ulex, pcre, netclient (>= 4.0.1), dbm, 
-                  json-static, treap
+                  json-static, treap, nettls-gnutls (= 4.1.9)
   DataFiles:
     ../_build/tlds/tlds.pag ($datadir/$pkg_name/tlds),
     ../_build/tlds/tlds.dir ($datadir/$pkg_name/tlds),

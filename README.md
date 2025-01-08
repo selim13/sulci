@@ -24,6 +24,8 @@ the bot outside of docker container.
 ## Changes
 
 - Added handling of external HTTPS requests.
+- Added the netunidata.other dependency to correctly load
+  the Mueller KOI8-R dictionary.
 
 ## Included plugins and their commands
 
@@ -151,7 +153,7 @@ Miscellaneous utility commands.
   `.dns 8.8.8.8`
 
 
-### Mueller (not functioning)
+### Mueller
 Searching and translating words using the Mueller dictionary.
 
 - **`.mueller <word>`**  

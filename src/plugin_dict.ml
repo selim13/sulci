@@ -10,10 +10,6 @@ open Plugin_command
 
 exception DictError of string
 
-let dictd_server = ""
-
-let dictd_port = 1
-    
 let connect server port =
   let inet_addr =
     try Unix.inet_addr_of_string server with Failure("inet_addr_of_string") ->
@@ -67,9 +63,9 @@ let read_text in_dict =
       
 let cmdlist = ["-list"]
   
-let process_cmd_dict cmd =
+let process_cmd_dict server port cmd =
   if List.mem cmd cmdlist then
-    let in_dict, out_dict = connect dictd_server dictd_port in
+    let in_dict, out_dict = connect server port in
     let reply = 
       (match get_status in_dict with
          | "220", _ ->
@@ -98,8 +94,8 @@ let process_cmd_dict cmd =
   else
     "Unknown command"
       
-let process_dict db word env =
-  let in_dict, out_dict = connect dictd_server dictd_port in
+let process_dict server port db word env =
+  let in_dict, out_dict = connect server port in
   let reply = match get_status in_dict with
     | "220", _ ->
         output_string out_dict 
@@ -139,14 +135,14 @@ let process_dict db word env =
 let rex1 = Pcre.regexp ~iflags:(cflags [`UTF8]) "([^\\s]+)[\\s]*$"
 let rex2 = Pcre.regexp "(!|\\*|[a-z]+)\\s+([a-z]+)"
   
-let dict xmpp env kind jid_from text =
+let dict server port xmpp env kind jid_from text =
   if text = "" then
     env.env_message xmpp kind jid_from (Lang.get_msg env.env_lang "plugin_dict_invalid_syntax" [])
   else
     if String.get text 0 = '-' then
       let proc () =
         let response = try
-          process_cmd_dict text
+          process_cmd_dict server port text
         with DictError error -> error
         in 
           env.env_message xmpp kind jid_from response
@@ -159,7 +155,7 @@ let dict xmpp env kind jid_from text =
         let word = Pcre.get_substring r 2 in
         let proc () =
           let response = try
-            process_dict db word env
+            process_dict server port db word env
           with (DictError error) -> error
           in
             env.env_message xmpp kind jid_from response
@@ -171,7 +167,7 @@ let dict xmpp env kind jid_from text =
           let word = Pcre.get_substring r 1 in
           let proc () =
             let response = try
-              process_dict "*" word env
+              process_dict server port "*" word env
             with (DictError error) -> error
             in
               env.env_message xmpp kind jid_from response
@@ -182,9 +178,16 @@ let dict xmpp env kind jid_from text =
             (Lang.get_msg env.env_lang "plugin_dict_invalid_syntax" [])
             
 let plugin opts =
+  let server =
+    try List.assoc "host" (List.assoc "server" opts)
+    with Not_found -> "dict.org" in
+  let port =
+    try int_of_string (List.assoc "port" (List.assoc "server" opts))
+    with Not_found -> 2628 in
+
   add_for_token
     (fun _opts xmpp ->
-       add_commands xmpp [("dict", dict)] opts
+       add_commands xmpp [("dict", dict server port)] opts
     )
 
 let _ =

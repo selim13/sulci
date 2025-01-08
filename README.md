@@ -26,6 +26,7 @@ the bot outside of docker container.
 - Added handling of external HTTPS requests.
 - Added the netunidata.other dependency to correctly load
   the Mueller KOI8-R dictionary.
+- Fixed loading DICT server settings from config.
 
 ## Included plugins and their commands
 
@@ -107,7 +108,7 @@ Currency converter.
   Converts an amount from one currency to another using the latest exchange rates.  
   Example: `.curr 100 USD EUR`
 
-### Dict (not functioning)
+### Dict
 Queries dictionary definitions from a DICT protocol server.
 
 - **`.dict <word>`**  

@@ -28,6 +28,7 @@ the bot outside of docker container.
   the Mueller KOI8-R dictionary.
 - Fixed loading DICT server settings from config.
 - Fixed missing .hostip command.
+- Disabled Google, Yandex, and Translate plugins, as their respective service APIs were changed or deprecated.
 
 ## Included plugins and their commands
 
@@ -127,7 +128,7 @@ Queries dictionary definitions from a DICT protocol server.
   Looks up the definition of a word across all available databases.  
   Example: `.dict * hello`
 
-### Google (not functioning)
+### Google (disabled - service API has changed)
 Integrates Google services.
 
 - **`.google <search query>`**  
@@ -182,7 +183,7 @@ Provides information about top-level domains (TLDs) by querying a database.
   Provides a link to the IANA website listing all country code TLDs.  
   Example: `.tld *`
 
-### Translate (not functioning)
+### Translate (disabled - service API has changed)
 Uses the m.translate.ru service to translate text between various language pairs.
 
 - **`.tr list`**  
@@ -190,7 +191,7 @@ Uses the m.translate.ru service to translate text between various language pairs
   Example: `.tr list`
 
 - **`.tr [lang] [text]`**  
-  Translates text between specified language pair (not functioning).  
+  Translates text between specified language pair.  
   Example: `.tr er Hello` (translates "Hello" from English to Russian)
 
 ### Userinfo
@@ -256,7 +257,7 @@ Displays weather.
   Fetches weather data for a given 4-letter airport code.  
   Example: `.wz ULLI` (fetches weather for Pulkovo Airport, St. Petersburg)
 
-### Yandex (not functioning)
+### Yandex (disabled - service API has changed)
 Integrations with Yandex services.
 
 Commands:

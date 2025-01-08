@@ -11,7 +11,6 @@ plugin_cerberus
 plugin_currency
 plugin_dict
 plugin_globalstats
-plugin_google
 plugin_hostip
 plugin_markov_sqlite3
 plugin_misc
@@ -21,12 +20,13 @@ plugin_roulette
 plugin_seen
 plugin_talkers
 plugin_tld
-plugin_translate
 plugin_userinfo
 plugin_vcard
 plugin_vocabulary
 plugin_vocabulary_muc
 plugin_weather
-plugin_yandex
 
 # plugin_1april
+# plugin_google
+# plugin_translate
+# plugin_yandex

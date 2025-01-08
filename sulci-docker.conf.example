@@ -47,8 +47,7 @@
 
  <lang dir='/usr/share/sulci/lang' default='ru'/>
 
- <acl jid='selim13@jabber.ru' class='botmaster'/>
-
+ <acl jid='admin@localhost' class='botmaster'/>
  
  <plugins>
 
@@ -90,10 +89,10 @@
    <command id='dict'/>
   </plugin>
 
-  <plugin name='google' path='/usr/share/sulci/plugins/plugin_google'>
+  <!-- <plugin name='google' path='/usr/share/sulci/plugins/plugin_google'>
    <command id='google'/>
    <command id='translate' name='gtr'/>
-  </plugin>
+  </plugin> -->
 
   <plugin name='hostip' path='/usr/share/sulci/plugins/plugin_hostip'>
    <command id='hostip'/>
@@ -117,9 +116,9 @@
    <command id='tld'/>
   </plugin>
 
-  <plugin name='translate' path='/usr/share/sulci/plugins/plugin_translate'>
+  <!-- <plugin name='translate' path='/usr/share/sulci/plugins/plugin_translate'>
    <command id='tr'/>
-  </plugin>
+  </plugin> -->
 
   <plugin name='userinfo' path='/usr/share/sulci/plugins/plugin_userinfo'>
    <command id='version'/>
@@ -144,9 +143,9 @@
    <command id='wz'/>
   </plugin>
 
-  <plugin name='yandex' path='/usr/share/sulci/plugins/plugin_yandex'>
+  <!-- <plugin name='yandex' path='/usr/share/sulci/plugins/plugin_yandex'>
    <command id='blogs'/>
-  </plugin>
+  </plugin> -->
 
   <!-- it was used on http://ejabberd.jabber.ru/ to display total 
        registered users and users online using ejabberd -->

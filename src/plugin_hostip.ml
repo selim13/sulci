@@ -56,9 +56,12 @@ let hostip xmpp env kind jid_from text =
               env.env_message xmpp kind jid_from response
           in
             Http_suck.http_get url callback
-              
+
 let plugin opts =
-  ()
-    
+  add_for_token
+    (fun _opts xmpp ->
+       add_commands xmpp [("hostip", hostip)] opts
+    )
+
 let _ =
   Plugin.add_plugin "hostip" plugin

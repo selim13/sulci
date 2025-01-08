@@ -27,6 +27,7 @@ the bot outside of docker container.
 - Added the netunidata.other dependency to correctly load
   the Mueller KOI8-R dictionary.
 - Fixed loading DICT server settings from config.
+- Fixed missing .hostip command.
 
 ## Included plugins and their commands
 
@@ -137,7 +138,7 @@ Integrates Google services.
   Translates text using Google Translate.  
   Example: `.translate en fr "Hello, how are you?"`
 
-### Hostip (not functioning)
+### Hostip
 Intergrates HostIP.info API.
 
 - **`.hostip <ip_or_hostname>`**  
